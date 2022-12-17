@@ -1,0 +1,19 @@
+{
+  "name": "birdnest",
+  "version": "1.0.0",
+  "description": "Birdnest project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roopekoo/Birdnest.git"
+  },
+  "author": "Roope Korkee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roopekoo/Birdnest/issues"
+  },
+  "homepage": "https://github.com/roopekoo/Birdnest#readme"
+}
