@@ -1,7 +1,8 @@
 {
   "name": "birdnest",
   "version": "1.0.0",
-  "description": "Birdnest project",
+  "type": "module",
+  "description": "Track drones that violate NoFlyZone for drones",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/roopekoo/Birdnest/issues"
   },
-  "homepage": "https://github.com/roopekoo/Birdnest#readme"
+  "homepage": "https://github.com/roopekoo/Birdnest#readme",
+  "dependencies": {
+    "dom-parser": "^0.1.6",
+    "node-fetch": "^3.3.0"
+  }
 }
