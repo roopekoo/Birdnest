@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 /**
  * Fetch data from url and return in text format
  * @param {String} url  Url to be fetched
