@@ -1,7 +1,7 @@
 import fetchUrl from './utils/dataFetch.js'
 import extractInfo from './utils/xmlParser.js'
 import violatorHandler from './Handlers/violatorHandler.js'
-import Violators from './violators.js';
+import Violators from './Handlers/Violators.js';
 
 const INTERVAL = 2 * 1000;
 
