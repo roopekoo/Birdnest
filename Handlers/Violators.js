@@ -12,37 +12,23 @@ export default class Violators {
         return this.violatorList.findIndex(e => e.pilotId === serialNumber);
     }
     /**
-     * Add or modify violator in the list
+     * Add violator to the list
      * @param {Object} userJSON userData
      */
     addViolator(userJSON) {
-        const id = userJSON.pilotId;
-        const ind = this.findViolator(id);
-        if (ind !== -1) {
-            var timerID = this.violatorList[ind].timerID;
-            clearTimeout(timerID);
-            timerID = this.setTimer(id);
-            this.violatorList[ind].timerID = timerID;
-            console.log("Reset timer for: " + id)
-        }
-        else {
-            const timerID = this.setTimer(id);
-            userJSON.timerID = timerID;
+        const id = this.findViolator(userJSON.pilotId);
+        if (id === -1) {
             this.violatorList.push(userJSON);
-            console.log("Added " + id)
         }
     }
     /**
-     * Set violator lifetime on the violator list. Signal on removal
-     * @param {String} serial serial of the drone
-     * @returns timeout ID
+     * Remove violator from the list
+     * @param {Object} userJSON userData
      */
-    setTimer(serial) {
-        const timerID = setTimeout((serial) => {
-            const ind = this.findViolator(serial);
-            this.violatorList.splice(ind, 1);
-            console.log("Removed " + serial)
-        }, LIFETIME, serial);
-        return timerID;
+    removeViolator(serial) {
+        const id = this.findViolator(serial);
+        if (id !== -1) {
+            this.violatorList.splice(id, 1);
+        }
     }
 }
