@@ -8,7 +8,7 @@ export default class Violators {
      * @param {String} serialNumber 
      * @returns {Number} index where the user is in the list, -1 if does not exist
      */
-    hasViolator(serialNumber) {
+    findViolator(serialNumber) {
         return this.violatorList.findIndex(e => e.pilotId === serialNumber);
     }
     /**
@@ -17,7 +17,7 @@ export default class Violators {
      */
     addViolator(userJSON) {
         const id = userJSON.pilotId;
-        const ind = this.hasViolator(id);
+        const ind = this.findViolator(id);
         if (ind !== -1) {
             var timerID = this.violatorList[ind].timerID;
             clearTimeout(timerID);
@@ -29,7 +29,7 @@ export default class Violators {
             const timerID = this.setTimer(id);
             userJSON.timerID = timerID;
             this.violatorList.push(userJSON);
-            console.log("Added" + id)
+            console.log("Added " + id)
         }
     }
     /**
@@ -39,7 +39,7 @@ export default class Violators {
      */
     setTimer(serial) {
         const timerID = setTimeout((serial) => {
-            const ind = this.hasViolator(serial);
+            const ind = this.findViolator(serial);
             this.violatorList.splice(ind, 1);
             console.log("Removed " + serial)
         }, LIFETIME, serial);
