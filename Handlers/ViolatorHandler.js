@@ -1,5 +1,6 @@
 import fetchUrl from "../utils/dataFetch.js";
 import Violators from "./Violators.js";
+import WebHandler from "./WebHandler.js";
 
 export default class ViolatorHandler {
     // 10 minute timeout for keeping the violator in the list
@@ -12,6 +13,15 @@ export default class ViolatorHandler {
 
     //Add Violators class instance
     violators_class = new Violators;
+    webHandlerInstance = WebHandler;
+
+    /**
+     * Set WebHandler class instance
+     * @param {WebHandler} webInstance 
+     */
+    setWebInstance(webInstance) {
+        this.webHandlerInstance = webInstance;
+    }
 
     /**
      * Get violator personal info and save it to Violator class

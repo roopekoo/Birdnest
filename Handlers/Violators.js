@@ -1,6 +1,3 @@
-// 10 minute timeout for keeping the violator in the list
-const LIFETIME = 10 * 60 * 1000;
-
 export default class Violators {
     violatorList = []
     /**
