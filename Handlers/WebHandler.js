@@ -77,4 +77,9 @@ export default class WebHandler {
         const datapacket = { type: "remove", data: serialID };
         this.sendAll(datapacket);
     }
+
+    updateDist(distance) {
+        const datapacket = { type: "distance", data: distance };
+        this.sendAll(datapacket);
+    }
 }

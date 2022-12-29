@@ -41,6 +41,7 @@ export default class ViolatorHandler {
                 this.addTimer(serial);
                 this.webHandlerInstance.addUser(this.userJSON);
             }
+            this.webHandlerInstance.updateDist(violatorInfo.minDist);
         });
     }
     /**
