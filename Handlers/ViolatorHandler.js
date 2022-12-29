@@ -41,8 +41,8 @@ export default class ViolatorHandler {
                 this.addTimer(serial);
                 this.webHandlerInstance.addUser(this.userJSON);
             }
-            this.webHandlerInstance.updateDist(violatorInfo.minDist);
         });
+        this.webHandlerInstance.updateDist(violatorInfo.minDist);
     }
     /**
      * Find timer index from timers array
