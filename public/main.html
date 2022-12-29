@@ -4,6 +4,21 @@
 <head>
     <meta charset="utf-8">
     <title>Project birdnest</title>
+    <style>
+        div.small {
+            line-height: 0;
+        }
+
+        p.red {
+            color: red;
+            font-weight: bold;
+        }
+
+        p.green {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,6 +39,61 @@
             <p class="phone">Phone number: N/A</p>
         </div>
     </template>
+    <script>
+        const url = 'ws://localhost:3000/ws';
+        let socket = new WebSocket(url);
+
+        const listTemplate = document.getElementById('violator-template');
+
+        socket.onmessage = function (e) {
+            const obj = JSON.parse(e.data)
+            const type = obj.type;
+            if (type == 'distance') {
+                const value = (obj.data / 1000).toFixed(2);
+                const distElem = document.getElementById('dist').nextElementSibling;
+                if (value < 100) {
+                    distElem.className = 'red';
+                } else {
+                    distElem.classList = 'green';
+                }
+                distElem.innerText = value + ' meters'
+            }
+            else if (type === 'add') {
+                const violatorList = document.getElementById('list-container');
+
+                const violators = obj.data;
+                violators.forEach(violator => {
+                    const templateClone = listTemplate.content.cloneNode(true);
+                    const name = templateClone.querySelector('.name');
+                    const email = templateClone.querySelector('.email');
+                    const phone = templateClone.querySelector('.phone');
+
+                    name.innerText = 'Name: ' + violator.firstName + ' ' + violator.lastName;
+                    email.innerText = 'Email: ' + violator.email;
+                    phone.innerText = 'Phone number: ' + violator.phoneNumber;
+
+                    templateClone.getElementById("serialID").id = violator.pilotId;
+
+                    violatorList.append(templateClone);
+                });
+                updateListCount();
+
+            }
+            else if (type === 'remove') {
+                const violatorList = document.getElementById('list-container');
+                const node = violatorList.querySelector('#' + obj.data)
+                violatorList.removeChild(node);
+                updateListCount()
+            }
+
+            function updateListCount() {
+                const count = document.getElementById('list-container').childElementCount;
+                document.getElementById('listTitle').innerText = 'Violators (' + count + ')';
+
+            }
+        }
+        socket.onclose = event => console.log(`Closed webSocket: ${event.code}`);
+    </script>
 </body>
 
 </html>
