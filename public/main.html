@@ -40,7 +40,7 @@
         </div>
     </template>
     <script>
-        const url = 'ws://localhost:3000/ws';
+        const url = 'ws://' + location.host + '/ws';
         let socket = new WebSocket(url);
 
         const listTemplate = document.getElementById('violator-template');
@@ -54,7 +54,7 @@
                 if (value < 100) {
                     distElem.className = 'red';
                 } else {
-                    distElem.classList = 'green';
+                    distElem.className = 'green';
                 }
                 distElem.innerText = value + ' meters'
             }
