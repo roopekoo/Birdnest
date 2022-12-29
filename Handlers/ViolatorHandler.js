@@ -39,10 +39,9 @@ export default class ViolatorHandler {
             }
             else {
                 this.addTimer(serial);
-                // send webInstance the userJSON to be added to the list
+                this.webHandlerInstance.addUser(this.userJSON);
             }
         });
-        console.log("Timer counts: " + this.timers.length + "; Violators count: " + this.violators_class.violatorList.length); //debug
     }
     /**
      * Find timer index from timers array
@@ -95,7 +94,7 @@ export default class ViolatorHandler {
             const timerID = this.timers[timerInd].timerID;
             this.timers.splice(timerInd, 1);
             this.violators_class.removeViolator(serial);
-            // Send signal to update website list (remove element)
+            this.webHandlerInstance.deleteUser(serial);
         }
     }
 }

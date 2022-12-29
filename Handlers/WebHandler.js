@@ -43,4 +43,11 @@ export default class WebHandler {
         });
     }
 
+    addUser(userJSON) {
+        console.log('Add violator ' + userJSON);
+    }
+
+    deleteUser(serialID) {
+        console.log('Remove violator ' + serialID);
+    }
 }
