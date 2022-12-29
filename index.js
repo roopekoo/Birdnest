@@ -14,8 +14,11 @@ var webHandler = new WebHandler;
 violatorHandler.setWebInstance(webHandler);
 webHandler.setViolatorInstance(violatorHandler);
 
+// Create server
+webHandler.initServer();
+
 // Get data every 2 seconds
-const fetchInterval = setInterval(fetchLoop, INTERVAL);
+setInterval(fetchLoop, INTERVAL);
 
 
 async function fetchLoop() {
@@ -27,4 +30,3 @@ async function fetchLoop() {
   violatorHandler.handleViolators(violatorInfo);
 }
 
-//TODO: add createServer
