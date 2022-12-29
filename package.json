@@ -5,7 +5,8 @@
   "description": "Track drones that violate NoFlyZone for drones",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "eslint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,12 @@
     "dom-parser": "^0.1.6",
     "node-fetch": "^3.3.0",
     "ws": "^8.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.30.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-promise": "^6.1.1"
   }
 }
