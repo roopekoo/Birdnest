@@ -6,7 +6,7 @@
     <title>Project birdnest</title>
     <style>
         div.small {
-            line-height: 0;
+            line-height: 1;
         }
 
         p.red {
@@ -40,7 +40,7 @@
         </div>
     </template>
     <script>
-        const url = 'wss://' + location.host + '/ws';
+        const url = 'ws://' + location.host + '/ws';
         let socket = new WebSocket(url);
 
         const listTemplate = document.getElementById('violator-template');
