@@ -1,5 +1,5 @@
 import fetchUrl from "../utils/dataFetch.js";
-import Violators from "./Violators.js";
+import Violators from "../ClassObjects/Violators.js";
 import WebHandler from "./WebHandler.js";
 
 export default class ViolatorHandler {
