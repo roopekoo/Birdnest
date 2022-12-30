@@ -1,7 +1,7 @@
 export default class Violators {
   violatorList = [];
   /**
-   * Check if the violator is in the list
+   * Check if the violator is on the list
    * @param {String} serialNumber
    * @returns {Number} index where the user is in the list, -1 if does not exist
    */
@@ -21,7 +21,7 @@ export default class Violators {
   }
 
   /**
-   * Remove violator from the list
+   * Remove the violator from the list
    * @param {Object} userJSON userData
    */
   removeViolator (serial) {

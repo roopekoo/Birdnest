@@ -23,7 +23,7 @@ export default class WebHandler {
     this.violatorHandler = instance;
   }
   /**
-   * Open http server and webSocket
+   * Open the HTTP server and WebSocket
    */
   initServer () {
     const server = http.createServer((req, res) => {
@@ -55,7 +55,7 @@ export default class WebHandler {
     });
   }
   /**
-   * Save webSockets on a Set and give full list of violators on establishing the connection
+   * Save WebSockets on a Set and give the full list of violators on establishing the connection
    * @param {WebSocket} ws 
    */
   onSocketConnect (ws) {
@@ -69,7 +69,7 @@ export default class WebHandler {
   }
   /**
    * Broadcast the same message to each client
-   * @param {Object} datapacket Message package to be send
+   * @param {Object} datapacket Message package to be sent
    */
   sendAll (datapacket) {
     this.clients.forEach(client => {
@@ -77,15 +77,15 @@ export default class WebHandler {
     });
   }
   /**
-   * Send message to a single client
+   * Send a message to a single client
    * @param {WebSocket} target to whom to send the message
-   * @param {Object} datapacket Message package to be send
+   * @param {Object} datapacket Message package to be sent
    */
   sendSingleMessage (target, datapacket) {
     target.send(JSON.stringify(datapacket));
   }
   /**
-   * Send ws message to every clients about new user need to be added to the list
+   * Send WS message to every client about a new user to be added to the list
    * @param {Object} userJSON Info about the violator
    */
   addUser (userJSON) {
@@ -93,7 +93,7 @@ export default class WebHandler {
     this.sendAll(datapacket);
   }
   /**
-   * Send ws message to every client about need for removing the user from the list
+   * Send WS message to every client about the need for removing the user from the list
    * @param {*} serialID Drone ID
    */
   deleteUser (serialID) {
@@ -101,7 +101,7 @@ export default class WebHandler {
     this.sendAll(datapacket);
   }
   /**
-   * Send ws message to every client about a new closest distance
+   * Send WS message to every client about a new closest distance
    * @param {Number} distance 
    */
   updateDist (distance) {

@@ -6,9 +6,9 @@ const NEST_Y = 250000;
 const RADIUS = 100000;
 
 /**
- * Parse information from xml, such timestamp, smallest distance and list of violators
+ * Parse information from XML, such as timestamp, smallest distance, and list of violators
  * @param {String} xml
- * @returns {Object} objecvt containing timestamp, showtest distance to the nest and list of violators
+ * @returns {Object} object containing a timestamp, shortest distance to the nest, and list of violators
  */
 export default function extractInfo (xml) {
   let minDist = null;
@@ -36,7 +36,6 @@ export default function extractInfo (xml) {
 
   return { timeStamp, minDist, violators };
 }
-
 /**
  * Computes Euclidean distance between the drone and the nest
  * @param {Number} X x-coordinate

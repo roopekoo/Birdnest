@@ -3,7 +3,7 @@ import Violators from '../ClassObjects/Violators.js';
 import WebHandler from './WebHandler.js';
 
 export default class ViolatorHandler {
-  // 10 minute timeout for keeping the violator in the list
+  // 10-minute timeout for keeping the violator on the list
   LIFETIME = 10 * 60 * 1000;
 
   url = 'https://assignments.reaktor.com/birdnest/pilots/';
@@ -24,11 +24,11 @@ export default class ViolatorHandler {
   }
 
   /**
-	 * Get violator personal info and save it to Violator class
+	 * Get the violator's info and save it to the Violator class
 	 * @param {Object} violatorInfo
 	 */
   handleViolators(violatorInfo) {
-    // save every violator to Violators class
+    // save every violator to the Violators class
     violatorInfo.violators.forEach(async violator => {
       // Fetch violator information
       const userData = await fetchUrl(this.url + violator.serial);
@@ -78,7 +78,7 @@ export default class ViolatorHandler {
   }
 
   /**
-	 * Set new timeout, save timer to timers array and add new violator in Violator class
+	 * Set a new timeout, save timer to timers array, and add new violator in Violator class
 	 * @param {String} serial id
 	 */
   addTimer(serial) {
