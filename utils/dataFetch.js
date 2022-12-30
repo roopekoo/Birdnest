@@ -5,6 +5,6 @@ import fetch from 'node-fetch';
  * @returns {String}    Stringified response of the url
  */
 export default async function fetchUrl (url) {
-	const res = await fetch(url);
-	return await res.text();
+  const res = await fetch(url);
+  return await res.text();
 }

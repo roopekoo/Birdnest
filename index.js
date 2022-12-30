@@ -20,11 +20,14 @@ webHandler.initServer();
 // Get data every 2 seconds
 setInterval(fetchLoop, INTERVAL);
 
+/**
+ * Fetch data from url, extract ifo and send the data to ViolatorHandler
+ */
 async function fetchLoop () {
-	// Fetch data
-	const xml = await fetchUrl(url);
-	// Extract timestamp, smallest distance and list of violators
-	const violatorInfo = extractInfo(xml);
-	// Send info to violatorHandler
-	violatorHandler.handleViolators(violatorInfo);
+  // Fetch data
+  const xml = await fetchUrl(url);
+  // Extract timestamp, smallest distance and list of violators
+  const violatorInfo = extractInfo(xml);
+  // Send info to violatorHandler
+  violatorHandler.handleViolators(violatorInfo);
 }
