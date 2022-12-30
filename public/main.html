@@ -46,7 +46,7 @@
         </div>
     </template>
     <script>
-        const url = 'ws://' + location.host + '/ws';
+        const url = 'wss://' + location.host + '/ws';
         let socket = new WebSocket(url);
         const listTemplate = document.getElementById('violator-template');
         socket.onmessage = function (e) {
