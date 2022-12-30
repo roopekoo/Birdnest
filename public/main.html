@@ -9,6 +9,11 @@
             line-height: 1;
         }
 
+        li.bold {
+            font-weight: bold;
+        }
+
+
         p.red {
             color: red;
             font-weight: bold;
@@ -26,59 +31,63 @@
         <h1>Live birdnest NDZ violators list</h1>
     </header>
     <main>
-        <h2 id="dist">Closest distance:</h2>
-        <p>N/A</p>
+        <h2>Closest current distance:</h2>
+        <p id="dist">N/A</p>
         <h2 id="listTitle">Violators (N/A)</h2>
-        <ul id="list-container">
-        </ul>
+        <ul id="list-container"></ul>
     </main>
     <template id="violator-template">
         <div id="serialID" class="small">
-            <h3 class="name">Name: N/A</h3>
-            <p class="email">Email: N/A</p>
-            <p class="phone">Phone number: N/A</p>
+            <li class="name bold">Name: N/A</li>
+            <li id="email">Email: N/A</li>
+            <li id="phone">Phone number: N/A</li>
+            <li id="minDist">Closest nest distance: N/A</li>
+            <br>
         </div>
     </template>
     <script>
-        const url = 'wss://' + location.host + '/ws';
+        const url = 'ws://' + location.host + '/ws';
         let socket = new WebSocket(url);
-
         const listTemplate = document.getElementById('violator-template');
-
         socket.onmessage = function (e) {
             const obj = JSON.parse(e.data)
             const type = obj.type;
             if (type == 'distance') {
-                const value = (obj.data / 1000).toFixed(2);
-                const distElem = document.getElementById('dist').nextElementSibling;
-                if (value < 100) {
-                    distElem.className = 'red';
-                } else {
-                    distElem.className = 'green';
+                const serial = obj.data.serial;
+                const distance = (obj.data.distance / 1000).toFixed(2);
+                if (serial === '') {
+                    const distElem = document.getElementById('dist');
+                    if (distance < 100) {
+                        distElem.className = 'red';
+                    } else {
+                        distElem.className = 'green';
+                    }
+                    distElem.innerText = distance + ' meters'
                 }
-                distElem.innerText = value + ' meters'
-            }
-            else if (type === 'add') {
+                else {
+                    const node = document.getElementById('list-container').querySelector('#' + serial);
+                    const distElem = node.querySelector('#minDist');
+                    distElem.innerText = 'Closest nest distance: ' + distance + ' meters'
+                }
+            } else if (type === 'add') {
                 const violatorList = document.getElementById('list-container');
-
                 const violators = obj.data;
                 violators.forEach(violator => {
                     const templateClone = listTemplate.content.cloneNode(true);
                     const name = templateClone.querySelector('.name');
-                    const email = templateClone.querySelector('.email');
-                    const phone = templateClone.querySelector('.phone');
+                    const email = templateClone.getElementById('email');
+                    const phone = templateClone.getElementById('phone');
+                    const minDist = templateClone.getElementById('minDist');
 
                     name.innerText = 'Name: ' + violator.firstName + ' ' + violator.lastName;
                     email.innerText = 'Email: ' + violator.email;
                     phone.innerText = 'Phone number: ' + violator.phoneNumber;
-
+                    minDist.innerText = 'Closest nest distance: ' + (violator.minDist / 1000).toFixed(2) + ' meters';
                     templateClone.getElementById("serialID").id = violator.pilotId;
-
                     violatorList.append(templateClone);
                 });
                 updateListCount();
-            }
-            else if (type === 'remove') {
+            } else if (type === 'remove') {
                 const violatorList = document.getElementById('list-container');
                 const node = violatorList.querySelector('#' + obj.data)
                 violatorList.removeChild(node);
@@ -88,7 +97,6 @@
             function updateListCount() {
                 const count = document.getElementById('list-container').childElementCount;
                 document.getElementById('listTitle').innerText = 'Violators (' + count + ')';
-
             }
         }
         socket.onclose = event => console.log(`Closed webSocket: ${event.code}`);

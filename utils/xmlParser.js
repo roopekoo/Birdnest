@@ -30,7 +30,7 @@ export default function extractInfo (xml) {
     }
     if (dist < RADIUS) {
       const serial = drone.getElementsByTagName('serialNumber')[0].innerHTML;
-      violators.push({ serial, distance: dist });
+      violators.push({ serial: serial, distance: dist });
     }
   });
 

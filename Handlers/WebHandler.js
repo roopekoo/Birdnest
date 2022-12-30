@@ -104,8 +104,8 @@ export default class WebHandler {
    * Send WS message to every client about a new closest distance
    * @param {Number} distance 
    */
-  updateDist (distance) {
-    const datapacket = { type: 'distance', data: distance };
+  updateDist (distInfo) {
+    const datapacket = { type: 'distance', data: distInfo };
     this.sendAll(datapacket);
   }
 }
