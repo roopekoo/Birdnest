@@ -37,14 +37,15 @@ export default class ViolatorHandler {
       } else {
         // Fetch new violator information
         const userData = await fetchUrl(this.url + violator.serial);
+        if (userData !== '') {
+          const userJSON = JSON.parse(userData);
+          userJSON.droneId = violator.serial;
+          userJSON.minDist = violator.distance;
+          const pilotId = userJSON.pilotId;
 
-        const userJSON = JSON.parse(userData);
-        userJSON.droneId = violator.serial;
-        userJSON.minDist = violator.distance;
-        const pilotId = userJSON.pilotId;
-
-        this.timer.addTimer(pilotId);
-        this.notifyOnAdd(userJSON);
+          this.timer.addTimer(pilotId);
+          this.notifyOnAdd(userJSON);
+        }
       }
     });
     this.webHandlerInstance.updateDist({ serial: '', distance: violatorInfo.minDist });

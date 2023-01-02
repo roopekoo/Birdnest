@@ -23,11 +23,14 @@ setInterval(fetchLoop, INTERVAL);
 /**
  * Fetch data from URL, extract info and send the data to ViolatorHandler
  */
-async function fetchLoop () {
+async function fetchLoop() {
   // Fetch data
   const xml = await fetchUrl(url);
-  // Extract timestamp, smallest distance, and list of violators
-  const violatorInfo = extractInfo(xml);
-  // Send info to violatorHandler
-  violatorHandler.handleViolators(violatorInfo);
+  if (xml !== '') {
+    // Extract timestamp, smallest distance, and list of violators
+    const violatorInfo = extractInfo(xml);
+    // Send info to violatorHandler
+    violatorHandler.handleViolators(violatorInfo);
+  }
+
 }
