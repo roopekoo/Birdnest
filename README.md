@@ -18,6 +18,6 @@ The website will show the current closest distance with the color red if the clo
 The violator list will show the number of violators in the list with an integer.
 
 ## Issues
-The WebSocket connection will close itself with a code _1006_ "Connection lost" after some time. Probably due to client inactivity.
+~~The WebSocket connection will close itself with a code _1006_ "Connection lost" after some time. Probably due to client inactivity.~~ Should be fixed in [67fc35c](https://github.com/roopekoo/Birdnest/commit/67fc35ccf8c84bd4ad8b2716f931c5fdb5deb82e).
 
 As Render.com is a free hosting service, the server will shut down after 15 minutes of inactivity. It will start up normally on opening the website but the violator list will be empty. Please wait about 10 minutes to see the first elements on the list to be removed.
