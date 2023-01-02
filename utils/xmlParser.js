@@ -1,5 +1,7 @@
 import DomParser from 'dom-parser';
 
+const parser = new DomParser();
+
 // Nest/sensor location
 const NEST_X = 250000;
 const NEST_Y = 250000;
@@ -10,11 +12,10 @@ const RADIUS = 100000;
  * @param {String} xml
  * @returns {Object} object containing a timestamp, shortest distance to the nest, and list of violators
  */
-export default function extractInfo (xml) {
+export default function extractInfo(xml) {
   let minDist = null;
   const violators = [];
 
-  const parser = new DomParser();
   const xmlDoc = parser.parseFromString(xml, 'text/xml');
   const timeStamp = xmlDoc.getElementsByTagName('capture')[0].attributes[0].value;
 
@@ -42,6 +43,6 @@ export default function extractInfo (xml) {
  * @param {Number} Y y-coordinate
  * @returns {Number} Euclidean distance from the NEST
  */
-function getDistance (X, Y) {
+function getDistance(X, Y) {
   return Math.sqrt((X - NEST_X) ** 2 + (Y - NEST_Y) ** 2);
 }
